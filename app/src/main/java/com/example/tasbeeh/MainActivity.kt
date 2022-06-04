@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.tasbeeh.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,15 +20,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         val wordList = listOf(
-            Data(R.drawable.heaven, "Субханноллох"),
-            Data(R.drawable.heaven, "Алхамдулиллах"),
-            Data(R.drawable.heaven, "Аллоху акбар"),
-            Data(R.drawable.heaven, "Астагфируллох"),
-            Data(R.drawable.heaven, "Астагфируллох ваатубу илайх"),
-            Data(R.drawable.heaven, "Субханноллохи ва бихамдихи субхоналлохил ъазиймн"),
-            Data(R.drawable.heaven, "Йа мукаллибал кулуб саббит колбий ъала дийник"),
-            Data(R.drawable.heaven, "Ла илаха илла анта субханака инний кунту миназ злимийн"),
-            Data(R.drawable.heaven, "Астагфируллохаллазий ла илаха илла хувал хаййул каййум ва атубу илайх")
+            Data(R.drawable.heaven, "Субханноллох", "Маъноси: Аллохни поклаб ёд киламин"),
+            Data(R.drawable.heaven, "Алхамдулиллах", "Маъноси: Аллохга хамд бўлсин"),
+            Data(R.drawable.heaven, "Аллоху акбар", "Маъноси: Аллох буюкдир"),
+            Data(R.drawable.heaven, "Астагфируллох", "Маъноси: Аллох кечирсин"),
+            Data(R.drawable.heaven, "Астагфируллох ваатубу илайх", "Маъноси: Аллохга истиғфор айтиб тавба қиламан"),
+            Data(R.drawable.heaven, "Субханноллохи ва бихамдихи субхоналлохил ъазиймн", "Маъноси: Аллохга хамд айтиш билан Уни айбу нуқсонлардан поклаб ёд этаман"),
+            Data(R.drawable.heaven, "Йа мукаллибал кулуб саббит колбий ъала дийник", "Маъноси: Эй қалбларни ўзгартирувчи, қалбимни динингда собит қил"),
+            Data(R.drawable.heaven, "Ла илаха илла анта субханака инний кунту миназ злимийн", "Маъноси: Сендан бошқа илоҳ йўқ. Сени поклаб ёд этурман. Албатта мен золимлардан бўлдим"),
+            Data(R.drawable.heaven, "Астагфируллохаллазий ла илаха илла хувал хаййул каййум ва атубу илайх", "Маъноси: Бархаёт,тирик Аллоҳдан авф этишини сўрайман ва Унга тавба қиламан")
         )
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

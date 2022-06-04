@@ -6,5 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Data(
     val imageInt: Int,
-    val tasbehWord: String
+    val divineWord: String,
+    val divineWordMeaning: String
 ): Parcelable

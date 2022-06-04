@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Tasbeeh</string>
-    <string name="tasbeeh_words">Зикр кўшиш</string>
+    <string name="divine_words">Зикр кўшиш</string>
     <string name="subhanalloh">Субханаллох</string>
-    <string name="meaning_subhanalloh">Ma\'nosi: Allohni poklab yod qilaman</string>
+
+    <string name="meaning_subhanalloh">Маъноси: Аллохни поклаб ёд киламин</string>
+    <string name="meaning_alhamdulillah">Маъноси: Аллохга хамд бўлсин</string>
+    <string name="meaning_allohu_akbar">Маъноси: Аллох буюкдир</string>
+    <string name="meaning_astahfirulloh">Маъноси: Аллох кечирсин</string>
+    <string name="meaning_astahfiruolloh_vaatubu_ilayh">Маъноси: Аллохга истиғфор айтиб тавба қиламан</string>
+    <string name="meaning_subhanallohi_va_biahmdihi">Маъноси: Аллохга хамд айтиш билан Уни айбу нуқсонлардан поклаб ёд этаман</string>
+    <string name="meaning_ya_muqollibal_qulub">Маъноси: Эй қалбларни ўзгартирувчи, қалбимни динингда собит қил</string>
+    <string name="meaning_la_ilaha_illa">Маъноси: Сендан бошқа илоҳ йўқ. Сени поклаб ёд этурман. Албатта мен золимлардан бўлдим</string>
+    <string name="meaning_astahfirullohallaziy">Маъноси: Бархаёт,тирик Аллоҳдан авф этишини сўрайман ва Унга тавба қиламан</string>
+
 </resources>

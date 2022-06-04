@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/heaven">
@@ -50,7 +49,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvTasbehWordInside"
+        android:id="@+id/tvDivineWordInside"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/subhanalloh"
@@ -72,7 +71,7 @@
         android:background="#00FFFFFF"
         android:src="@drawable/ic_play"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTasbehWordInside"
+        app:layout_constraintTop_toBottomOf="@+id/tvDivineWordInside"
         app:tint="@color/black" />
 
     <ImageView
@@ -88,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60sp"
         android:layout_marginEnd="60dp"
-        android:background="@drawable/rectangle_couter_display"
+        android:background="@drawable/rectangle_counter_display"
         android:gravity="center"
         android:text="0"
         android:textColor="@color/black"

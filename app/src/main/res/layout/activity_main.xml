@@ -11,16 +11,16 @@
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAddTasbehWord"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddDivineWord"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnAddTasbehWord"
+        android:id="@+id/btnAddDivineWord"
         android:layout_width="0dp"
         android:layout_height="70dp"
-        android:text="@string/tasbeeh_words"
+        android:text="@string/divine_words"
         android:textAllCaps="false"
         android:textSize="20sp"
         android:backgroundTint="#0A778A"

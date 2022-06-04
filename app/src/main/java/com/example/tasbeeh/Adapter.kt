@@ -15,12 +15,14 @@ class Adapter(
 ) : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageInt: ImageView = itemView.findViewById(R.id.ivImageInt)
-        val tasbehWords: TextView = itemView.findViewById(R.id.tasbeh_word_home)
+        private val imageInt: ImageView = itemView.findViewById(R.id.ivImageInt)
+        private val divineWords: TextView = itemView.findViewById(R.id.tasbeh_word_home)
+        private val divineWordsMeaning: TextView =itemView.findViewById(R.id.divineWordMeaning)
 
         fun bindView(data: Data, listener: (Data) -> Unit) {
             imageInt.setImageResource(data.imageInt)
-            tasbehWords.text = data.tasbehWord
+            divineWords.text = data.divineWord
+            divineWordsMeaning.text = data.divineWordMeaning
             itemView.setOnClickListener { listener(data) }
         }
     }
