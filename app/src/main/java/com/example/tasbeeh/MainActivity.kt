@@ -4,41 +4,37 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tasbeeh.databinding.ActivityMainBinding
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var list: ArrayList<Data>
-    private lateinit var adapter: Adapter
+
+    companion object {
+        const val INTENT_PARCELABLE = "OBJECT_INTENT"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(R.layout.activity_main)
 
-        binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        val wordList = listOf(
+            Data(R.drawable.heaven, "Субханноллох"),
+            Data(R.drawable.heaven, "Алхамдулиллах"),
+            Data(R.drawable.heaven, "Аллоху акбар"),
+            Data(R.drawable.heaven, "Астагфируллох"),
+            Data(R.drawable.heaven, "Астагфируллох ваатубу илайх"),
+            Data(R.drawable.heaven, "Субханноллохи ва бихамдихи субхоналлохил ъазиймн"),
+            Data(R.drawable.heaven, "Йа мукаллибал кулуб саббит колбий ъала дийник"),
+            Data(R.drawable.heaven, "Ла илаха илла анта субханака инний кунту миназ злимийн"),
+            Data(R.drawable.heaven, "Астагфируллохаллазий ла илаха илла хувал хаййул каййум ва атубу илайх")
+        )
 
-        list = ArrayList()
-
-        list.add(Data(R.drawable.heaven, "Субханноллох"))
-        list.add(Data(R.drawable.heaven, "Алхамдулиллах"))
-        list.add(Data(R.drawable.heaven, "Аллоху акбар"))
-        list.add(Data(R.drawable.heaven, "Астагфируллох"))
-        list.add(Data(R.drawable.heaven, "Астагфируллох ваатубу илайх"))
-        list.add(Data(R.drawable.heaven, "Субханноллохи ва бихамдихи субхоналлохил ъазиймн"))
-        list.add(Data(R.drawable.heaven, "Йа мукаллибал кулуб саббит колбий ъала дийник"))
-        list.add(Data(R.drawable.heaven, "Ла илаха илла анта субханака инний кунту миназ злимийн"))
-        list.add(Data(R.drawable.heaven, "Астагфируллохаллазий ла илаха илла хувал хаййул каййум ва атубу илайх"))
-
-        adapter = Adapter(list)
-        binding.recyclerView.adapter = adapter
-
-        adapter.onItemClick = {
-            val intent = Intent(this, ItemsInside::class.java)
-            intent.putExtra("word",it)
-            startActivity(intent)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter =Adapter(this, wordList){
+        val intent =Intent(this, ItemsInside::class.java)
+            intent.putExtra(INTENT_PARCELABLE, it)
+        startActivity(intent)
         }
     }
 }

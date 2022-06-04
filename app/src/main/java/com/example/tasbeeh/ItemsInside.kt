@@ -1,20 +1,23 @@
 package com.example.tasbeeh
 
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tasbeeh.databinding.InsideItemsBinding
 
 class ItemsInside : AppCompatActivity() {
-    private lateinit var binding: InsideItemsBinding
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        binding = InsideItemsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.inside_items)
 
-        val word = intent.getParcelableExtra<Data>("word")
-        if (word != null){
-            binding.tasbehWordInside.text = word.tasbehWord
-            binding.ivInside.setImageResource(word.imageInt)
+        val word = intent.getParcelableExtra<Data>(MainActivity.INTENT_PARCELABLE)
+
+        val ivInside = findViewById<ImageView>(R.id.ivInside)
+        val tasbehWordInside = findViewById<TextView>(R.id.tvTasbehWordInside)
+
+        if (word != null) {
+            tasbehWordInside.text = word.tasbehWord
+            ivInside.setImageResource(word.imageInt)
         }
     }
 }
