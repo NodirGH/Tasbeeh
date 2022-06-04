@@ -5,8 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tasbeeh.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     companion object {
         const val INTENT_PARCELABLE = "OBJECT_INTENT"
@@ -14,7 +16,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         val wordList = listOf(
             Data(R.drawable.heaven, "Субханноллох"),
@@ -28,10 +32,9 @@ class MainActivity : AppCompatActivity() {
             Data(R.drawable.heaven, "Астагфируллохаллазий ла илаха илла хувал хаййул каййум ва атубу илайх")
         )
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.adapter =Adapter(this, wordList){
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.adapter =Adapter(this, wordList){
         val intent =Intent(this, ItemsInside::class.java)
             intent.putExtra(INTENT_PARCELABLE, it)
         startActivity(intent)
