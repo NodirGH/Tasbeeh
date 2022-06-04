@@ -19,5 +19,17 @@ class ItemsInside : AppCompatActivity() {
             binding.tvTasbehWordInside.text = word.tasbehWord
             binding.ivInside.setImageResource(word.imageInt)
         }
+
+        var clickedTimes = 0
+        binding.btnForTap.setOnClickListener {
+            clickedTimes ++
+
+            binding.counter.text = clickedTimes.toString()
+        }
+        binding.btnRefreshInsider.setOnClickListener {
+            clickedTimes = 0
+            binding.counter.text = clickedTimes.toString()
+        }
+
     }
 }

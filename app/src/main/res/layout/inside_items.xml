@@ -77,20 +77,20 @@
 
     <ImageView
         android:id="@+id/ivInside"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/display_counter"
+        android:id="@+id/counter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="60sp"
         android:layout_marginEnd="60dp"
         android:background="@drawable/rectangle_couter_display"
         android:gravity="center"
-        android:text="5"
+        android:text="0"
         android:textColor="@color/black"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,6 +107,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/display_counter" />
+        app:layout_constraintTop_toBottomOf="@id/counter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
