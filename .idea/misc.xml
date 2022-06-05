@@ -16,10 +16,15 @@
         <entry key="..\:/Android Studio/Tasbeeh/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Android Studio/Tasbeeh/app/src/main/res/layout/inside_items.xml" value="0.12" />
         <entry key="..\:/Android Studio/Tasbeeh/app/src/main/res/layout/item_order.xml" value="0.22" />
+        <entry key="app/src/main/res/drawable/ic_plus.xml" value="0.1855" />
+        <entry key="app/src/main/res/drawable/ic_refresh_insider.xml" value="0.1855" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2907608695652174" />
+        <entry key="app/src/main/res/layout/inside_items.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/item_order.xml" value="0.2907608695652174" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

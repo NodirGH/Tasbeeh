@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="4dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="3dp"
     android:layout_marginStart="12dp"
-    android:layout_marginEnd="12dp"
     android:layout_marginTop="2dp"
-    android:foreground="?android:selectableItemBackground"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="4dp"
     android:clickable="true"
-    android:focusable="true">
+    android:elevation="4dp"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@drawable/rectangle_for_item_order"
+        android:orientation="vertical"
         android:padding="16dp">
 
         <RelativeLayout
@@ -27,7 +28,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tasbeh_word_home"
+                android:id="@+id/tvZikrTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
@@ -37,7 +38,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/amountDisplay"
+                android:id="@+id/tvZikrCounter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -46,11 +47,6 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/ivImageInt"
-                android:layout_width="1dp"
-                android:layout_height="1dp"
-                android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
 
@@ -58,21 +54,21 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tasbehWordMeaning"
+                android:id="@+id/tvZikrMeaning"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/meaning_subhanalloh"
-                android:textSize="22sp"
-                android:textStyle="bold"
                 android:layout_marginEnd="20dp"
-                android:textColor="@color/murky_grey" />
+                android:text="@string/meaning_subhanalloh"
+                android:textColor="@color/murky_grey"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <ImageButton
-                android:id="@+id/icRefresh"
+                android:id="@+id/ibRefresh"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
