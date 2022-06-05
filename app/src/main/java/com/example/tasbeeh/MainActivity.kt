@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasbeeh.data.ZikrData
 import com.example.tasbeeh.data.ZikrInfo
+import com.example.tasbeeh.data.local.ZikrLocal
+import com.example.tasbeeh.data.mapper.ZikrMapper
 import com.example.tasbeeh.databinding.ActivityMainBinding
 
 
@@ -24,11 +26,17 @@ class MainActivity : AppCompatActivity() {
         zikrAdapter.callback = {
             CounterActivity.startFromMainActivity(this, it)
         }
-        zikrAdapter.submitList(ZikrData.getZikrs())
+        ZikrLocal.getLocalDB(applicationContext).zikrDao()
+            .insertAll(ZikrData.getZikrs().map { it.mapToEntity() })
+
+        val zikrEntities = ZikrLocal.getLocalDB(applicationContext).zikrDao().getAllZikrs()
+        zikrAdapter.submitList(ZikrMapper.mapEntitiesToDtos(zikrEntities))
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = zikrAdapter
+
+
 
     }
 
