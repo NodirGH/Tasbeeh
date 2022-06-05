@@ -13,4 +13,9 @@
     <string name="meaning_la_ilaha_illa">Маъноси: Сендан бошқа илоҳ йўқ. Сени поклаб ёд этурман. Албатта мен золимлардан бўлдим</string>
     <string name="meaning_astahfirullohallaziy">Маъноси: Бархаёт,тирик Аллоҳдан авф этишини сўрайман ва Унга тавба қиламан</string>
 
+    <string name="enter_russian_words">Кирилча матнни киритинг</string>
+    <string name="enter_meaning_words">Маъносини киритинг</string>
+    <string name="add_divine_word">Зикрни қўшиш</string>
+    <string name="back">Ортга</string>
+
 </resources>

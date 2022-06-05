@@ -2,6 +2,8 @@ package com.example.tasbeeh
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasbeeh.databinding.ActivityMainBinding
@@ -37,6 +39,32 @@ class MainActivity : AppCompatActivity() {
         val intent =Intent(this, ItemsInside::class.java)
             intent.putExtra(INTENT_PARCELABLE, it)
         startActivity(intent)
+        }
+
+        showEditTextDialog()
+    }
+
+    private fun showEditTextDialog() {
+        binding.btnAddDivineWord.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            val inflater = layoutInflater
+            val dialogLayout = inflater.inflate(R.layout.edit_text_layout, null)
+            val editTextRussianWord = dialogLayout.findViewById<EditText>(R.id.etRussianWord)
+            val editTextMeaningWord = dialogLayout.findViewById<EditText>(R.id.etMeaningWord)
+
+            with(builder){
+                setTitle("Тасбех қўшиш!")
+                setPositiveButton("Зикрни қўшиш"){dialog, which ->
+
+                }
+
+                setNegativeButton("Ортга"){dialog, which ->
+
+                }
+
+                setView(dialogLayout)
+                show()
+            }
         }
     }
 }
