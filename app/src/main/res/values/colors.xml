@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="murky_grey">#ACA0A0</color>
+    <color name="color_666666">#666666</color>
+    <color name="main">#4C95FF</color>
+    <color name="stroke_main">#65FFFFFF</color>
 </resources>

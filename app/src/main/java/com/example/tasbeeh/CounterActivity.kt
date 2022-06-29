@@ -28,7 +28,6 @@ class CounterActivity : AppCompatActivity() {
 
         zikr?.let {
             binding.tvTasbehWordInside.text = zikr.zikr
-            binding.ivInside.setImageResource(R.drawable.heaven)
         }
 
         var clickedTimes = 0

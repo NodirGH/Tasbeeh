@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4E4949"
+    android:background="#CFC8C8"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -20,7 +20,7 @@
         android:id="@+id/llAddTasbehWord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0A778A"
+        android:background="@color/main"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
@@ -42,6 +42,7 @@
             android:layout_marginStart="6dp"
             android:text="@string/tasbeeh_words"
             android:textColor="@color/white"
+            android:fontFamily="@font/lora_bold"
             android:textSize="18sp" />
     </LinearLayout>
 
