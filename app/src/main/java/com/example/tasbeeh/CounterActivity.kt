@@ -1,8 +1,9 @@
 package com.example.tasbeeh
 
+import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.os.Handler
+import android.os.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.tasbeeh.data.ZikrInfo
@@ -20,6 +21,7 @@ class CounterActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCounterBinding.inflate(layoutInflater)
@@ -42,6 +44,7 @@ class CounterActivity : AppCompatActivity() {
                     binding.fluctuatedCircleUp.isVisible = false
                     binding.fluctuatedCircleDown.isVisible = true
 
+            //postDelay
             val run = Runnable {
                 binding.fluctuatedCircleDown.isVisible = false
                 binding.fluctuatedCircleUp.isVisible = true
@@ -50,6 +53,22 @@ class CounterActivity : AppCompatActivity() {
             handler.postDelayed(run, 200)
 
 
+            //vibrate
+            if (clickedTimes % 33 == 0) {
+                val vibrate = (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR_0_1) {
+                    vibrate.vibrate(
+                        VibrationEffect.createOneShot(
+                            500,
+                            VibrationEffect.DEFAULT_AMPLITUDE
+                        )
+                    )
+                } else {
+                    vibrate.vibrate(1000)
+                }
+            }
+            //sharPref
+            saveData()
         }
         binding.btnRefreshInsider.setOnClickListener {
             clickedTimes = 0
@@ -60,6 +79,27 @@ class CounterActivity : AppCompatActivity() {
             finish()
         }
 
+    //sharedPreference
+        loadData()
+    }
 
+
+
+    private fun saveData() {
+        val insertedText = binding.counter.text.toString()
+        binding.counter.text = insertedText
+
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.apply{
+            putString("STRING_KEY", insertedText)
+        }.apply()
+    }
+
+    private fun loadData() {
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val savedString = sharedPreferences.getString("STRING_KEY", null)
+
+        binding.counter.text = savedString
     }
 }
