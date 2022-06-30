@@ -12,12 +12,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:fontFamily="@font/lora_semibolditalic"
         android:gravity="center"
         android:text="@string/subhanalloh"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:fontFamily="@font/lora_semibolditalic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTasbehWordInside"
         app:tint="#ffffff" />
-
 
     <TextView
         android:id="@+id/counter"
@@ -51,6 +50,72 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnPlay" />
 
+    <ImageView
+        android:id="@+id/cirleOneUp"
+        android:layout_width="70dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/circle_main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/counter" />
+
+    <ImageView
+        android:id="@+id/circleTwoUp"
+        android:layout_width="81dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/circle_main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cirleOneUp" />
+
+    <ImageView
+        android:id="@+id/circleThreeUp"
+        android:layout_width="103dp"
+        android:layout_height="113dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/circle_main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/circleTwoUp" />
+
+    <ImageView
+        android:id="@+id/fluctuatedCircleUp"
+        android:layout_width="138dp"
+        android:layout_height="133dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/circle_main"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cirleOneUp" />
+
+    <ImageView
+        android:id="@+id/circleDown"
+        android:layout_width="114dp"
+        android:layout_height="102dp"
+        android:layout_marginBottom="48dp"
+        android:src="@drawable/circle_main"
+        app:layout_constraintBottom_toBottomOf="@+id/btnForTap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/fluctuatedCircleDown"
+        android:layout_width="138dp"
+        android:layout_height="133dp"
+        android:src="@drawable/circle_main"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/circleDown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="64dp"/>
+
     <ImageButton
         android:id="@+id/btnForTap"
         android:layout_width="match_parent"
@@ -58,9 +123,10 @@
         android:background="#003700B3"
         app:layout_constraintBottom_toTopOf="@+id/llBottomActions"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/counter" />
+        app:layout_constraintTop_toBottomOf="@id/counter"
+        app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
         android:id="@+id/llBottomActions"

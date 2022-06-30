@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = zikrAdapter
 
+        //alert dialog
         binding.llAddTasbehWord.setOnClickListener {
             val mDialogView = LayoutInflater.from(this).inflate(R.layout.add_zikr, null)
             val mBuilder = AlertDialog.Builder(this)

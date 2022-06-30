@@ -2,7 +2,9 @@ package com.example.tasbeeh
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.tasbeeh.data.ZikrInfo
 import com.example.tasbeeh.databinding.ActivityCounterBinding
 
@@ -30,11 +32,24 @@ class CounterActivity : AppCompatActivity() {
             binding.tvTasbehWordInside.text = zikr.zikr
         }
 
+
         var clickedTimes = 0
         binding.btnForTap.setOnClickListener {
-            clickedTimes++
+                    clickedTimes++
 
-            binding.counter.text = clickedTimes.toString()
+                    binding.counter.text = clickedTimes.toString()
+
+                    binding.fluctuatedCircleUp.isVisible = false
+                    binding.fluctuatedCircleDown.isVisible = true
+
+            val run = Runnable {
+                binding.fluctuatedCircleDown.isVisible = false
+                binding.fluctuatedCircleUp.isVisible = true
+            }
+            val handler = Handler()
+            handler.postDelayed(run, 200)
+
+
         }
         binding.btnRefreshInsider.setOnClickListener {
             clickedTimes = 0
@@ -44,6 +59,7 @@ class CounterActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
+
 
     }
 }
