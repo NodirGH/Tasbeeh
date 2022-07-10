@@ -9,6 +9,7 @@ data class ZikrInfo(
     val id: Int = 0,
     val zikr: String = "",
     val translation: String = "",
+    val arabicWord: String = "",
     val counter: Int = 0,
     val isDeletable: Boolean = true
 ) : Parcelable {
@@ -16,6 +17,7 @@ data class ZikrInfo(
         return ZikrEntity(
             zikr = zikr,
             translation = translation,
+            arabicWord = arabicWord,
             counter = counter,
             isDeletable = isDeletable
         )

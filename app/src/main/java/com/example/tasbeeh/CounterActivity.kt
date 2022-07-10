@@ -37,12 +37,12 @@ class CounterActivity : AppCompatActivity() {
 
         var clickedTimes = 0
         binding.btnForTap.setOnClickListener {
-                    clickedTimes++
+            clickedTimes++
 
-                    binding.counter.text = clickedTimes.toString()
+            binding.counter.text = clickedTimes.toString()
 
-                    binding.fluctuatedCircleUp.isVisible = false
-                    binding.fluctuatedCircleDown.isVisible = true
+            binding.fluctuatedCircleUp.isVisible = false
+            binding.fluctuatedCircleDown.isVisible = true
 
             //postDelay
             val run = Runnable {
@@ -50,7 +50,7 @@ class CounterActivity : AppCompatActivity() {
                 binding.fluctuatedCircleUp.isVisible = true
             }
             val handler = Handler()
-            handler.postDelayed(run, 200)
+            handler.postDelayed(run, 100)
 
 
             //vibrate
@@ -79,10 +79,9 @@ class CounterActivity : AppCompatActivity() {
             finish()
         }
 
-    //sharedPreference
+        //sharedPreference
         loadData()
     }
-
 
 
     private fun saveData() {
@@ -91,7 +90,7 @@ class CounterActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.apply{
+        editor.apply {
             putString("STRING_KEY", insertedText)
         }.apply()
     }

@@ -10,6 +10,7 @@ class ZikrMapper {
                 id = zikrEntity.id ?: 0,
                 zikr = zikrEntity.zikr ?: "",
                 translation = zikrEntity.translation ?: "",
+                arabicWord = zikrEntity.arabicWord ?: "",
                 counter = zikrEntity.counter ?: 0,
                 isDeletable = zikrEntity.isDeletable ?: false
             )

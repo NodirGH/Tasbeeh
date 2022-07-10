@@ -36,6 +36,8 @@ class ZikrAdapter() : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
 
         fun bindView(zikrInfo: ZikrInfo) {
             binding.tvZikrTitle.text = zikrInfo.zikr
+            binding.tvZikrMeaning.text = zikrInfo.translation
+            binding.tvArabicWord.text = zikrInfo.arabicWord
             binding.root.setOnClickListener { callback?.invoke(zikrInfo) }
         }
     }
