@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         zikrAdapter.callback = {
             CounterActivity.startFromMainActivity(this, it)
         }
-        ZikrLocal.getLocalDB(applicationContext).zikrDao()
+        ZikrLocal.getLocalDB(applicationContext).zikrDao()          // I have to merge ZikrLocal into ZikrDatabase
             .insertAll(ZikrData.getZikrs().map { it.mapToEntity() })
 
         val zikrEntities = ZikrLocal.getLocalDB(applicationContext).zikrDao().getAllZikrs()

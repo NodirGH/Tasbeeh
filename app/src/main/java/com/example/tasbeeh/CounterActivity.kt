@@ -54,12 +54,12 @@ class CounterActivity : AppCompatActivity() {
 
 
             //vibrate
-            if (clickedTimes % 33 == 0) {
+            if (clickedTimes % 100 == 0 || clickedTimes == 33) {
                 val vibrate = (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR_0_1) {
                     vibrate.vibrate(
                         VibrationEffect.createOneShot(
-                            500,
+                            1000,
                             VibrationEffect.DEFAULT_AMPLITUDE
                         )
                     )
