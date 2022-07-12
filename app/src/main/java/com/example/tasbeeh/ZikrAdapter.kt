@@ -13,7 +13,7 @@ class ZikrAdapter() : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
 
     fun submitList(zikrs: List<ZikrInfo>) {
         this.zikrs = zikrs
-        notifyItemRangeChanged(0, itemCount)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
