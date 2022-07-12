@@ -36,6 +36,7 @@ class TasbehViewModel(application: Application) : AndroidViewModel(application) 
             isSuccessful.postValue(true)
         }catch (e : Exception){
             Log.d("ErrorAddDB", e.message.toString())
+            //Todo error handling with messageLiveData
             isSuccessful.postValue(false)
         }
 
