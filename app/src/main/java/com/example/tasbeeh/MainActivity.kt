@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
         //alert dialog
         viewModel.isSuccessful.observe(this, Observer { isSuccessful ->
             if (isSuccessful)
-                Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Зикр қўшилди", Toast.LENGTH_SHORT).show()
             else
-                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Хатолик бор", Toast.LENGTH_SHORT).show()
 
         })
         binding.llAddTasbehWord.setOnClickListener {
@@ -63,26 +63,16 @@ class MainActivity : AppCompatActivity() {
             val mAlertDialog = mBuilder.show()
 
             bindingAddDialog.btnAddAlertDialog.setOnClickListener {
-                //TODO validate if the input fields are filled with text
-                // if not show error for the text field
-                /// bindingAddDialog.etEnterArabicWord.error = "Some Error"
-                //if(et.isNotFilled){
-                //   bindingAddDialog.etEnterArabicWord.error = "Some Error"
-                //   return
-                //}
-                //
                 val zikrInfo = ZikrInfo(
-//                    if (bindingAddDialog.etEnterArabicWord.text.isNotEmpty() ){
-//                        arabicWord = bindingAddDialog.etEnterArabicWord.text.toString()
-//                    } else{
-//                          Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
-//                        return@setOnClickListener
-//                          }
-//                       ,
-                    translation = bindingAddDialog.etEnterMeaningWord.text.toString(),
-                    zikr = bindingAddDialog.etEnterRussianWord.text.toString()
-                );
-                viewModel.addZikr(zikrInfo)
+                    arabicWord = bindingAddDialog.etEnterArabicWord.text.toString(),
+                    zikr = bindingAddDialog.etEnterZikrWord.text.toString(),
+                    translation = bindingAddDialog.etEnterMeaningWord.text.toString()
+                )
+                if (zikrInfo.arabicWord.isNotEmpty() && zikrInfo.translation.isNotEmpty() && zikrInfo.zikr.isNotEmpty()){
+                    viewModel.addZikr(zikrInfo)
+                } else {
+                    Toast.makeText(this, "Илтимос, Хамма қаторларни тўлдиринг", Toast.LENGTH_LONG).show()
+                }
                 mAlertDialog.dismiss()
             }
 
