@@ -11,6 +11,9 @@ interface ZikrDao {
     @Query("SELECT * FROM zikrentity")
     fun getAllZikrs(): LiveData<List<ZikrEntity>>
 
+    @Query("SELECT COUNTER id FROM zikrentity")
+    fun getZikrCounts(): List<Int>
+
     @Insert
     fun insert(zikr: ZikrEntity)
 

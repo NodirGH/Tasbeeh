@@ -8,9 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tasbeeh.data.ZikrData
 import com.example.tasbeeh.data.ZikrInfo
-import com.example.tasbeeh.data.local.ZikrLocal
 import com.example.tasbeeh.data.mapper.ZikrMapper
 import com.example.tasbeeh.databinding.ActivityMainBinding
 import com.example.tasbeeh.databinding.DialogAddZikrBinding
@@ -31,11 +29,9 @@ class MainActivity : AppCompatActivity() {
         zikrAdapter.callback = {
             CounterActivity.startFromMainActivity(this, it)
         }
-        //TODO you have to make logic to prevent inserting every time
-        // check if the date exists in database, if not do not add
-        ZikrLocal.getLocalDB(applicationContext)
-            .zikrDao()          // I have to merge ZikrLocal into ZikrDatabase
-            .insertAll(ZikrData.getZikrs().map { it.mapToEntity() })
+
+        val tasbehViewModel = TasbehViewModel(application)
+        tasbehViewModel.insertInitialData(this)
 
         viewModel = ViewModelProvider(
             this,
@@ -76,7 +72,13 @@ class MainActivity : AppCompatActivity() {
                 //}
                 //
                 val zikrInfo = ZikrInfo(
-                    arabicWord = bindingAddDialog.etEnterArabicWord.text.toString(),
+//                    if (bindingAddDialog.etEnterArabicWord.text.isNotEmpty() ){
+//                        arabicWord = bindingAddDialog.etEnterArabicWord.text.toString()
+//                    } else{
+//                          Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+//                        return@setOnClickListener
+//                          }
+//                       ,
                     translation = bindingAddDialog.etEnterMeaningWord.text.toString(),
                     zikr = bindingAddDialog.etEnterRussianWord.text.toString()
                 );
