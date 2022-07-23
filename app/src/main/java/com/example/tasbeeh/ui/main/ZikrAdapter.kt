@@ -1,10 +1,11 @@
-package com.example.tasbeeh
+package com.example.tasbeeh.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tasbeeh.data.ZikrInfo
+import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.databinding.ItemOrderBinding
+import com.example.tasbeeh.utils.manageVisibility
 
 class ZikrAdapter() : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
 
@@ -38,6 +39,8 @@ class ZikrAdapter() : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
             binding.tvZikrTitle.text = zikrInfo.zikr
             binding.tvZikrMeaning.text = zikrInfo.translation
             binding.tvArabicWord.text = zikrInfo.arabicWord
+            binding.tvZikrCounter.text = zikrInfo.counter.toString()
+            binding.ibDelete.manageVisibility(zikrInfo.isDeletable)
             binding.root.setOnClickListener { callback?.invoke(zikrInfo) }
         }
     }

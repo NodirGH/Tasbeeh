@@ -5,13 +5,16 @@ import androidx.room.Room
 
 class ZikrLocal {
     companion object {
-        fun getLocalDB(applicationContext: Context): ZikrDatabase {
-            val zikrDb = Room.databaseBuilder(
+        lateinit var zikrDatabase: ZikrDatabase
+
+        fun initDatabase(applicationContext: Context) {
+            zikrDatabase = Room.databaseBuilder(
                 applicationContext,
                 ZikrDatabase::class.java, "zikr-db"
-            ).allowMainThreadQueries().build()
-
-            return zikrDb
+            )
+                .allowMainThreadQueries() // TODO remove to use Coroutines
+                .build()
         }
+
     }
 }

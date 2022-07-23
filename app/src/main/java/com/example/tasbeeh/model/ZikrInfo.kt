@@ -1,4 +1,4 @@
-package com.example.tasbeeh.data
+package com.example.tasbeeh.model
 
 import android.os.Parcelable
 import com.example.tasbeeh.data.local.ZikrEntity

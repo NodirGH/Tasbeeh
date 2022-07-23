@@ -1,18 +1,21 @@
-package com.example.tasbeeh
+package com.example.tasbeeh.ui.counter
 
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.*
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.example.tasbeeh.data.ZikrInfo
+import com.example.tasbeeh.R
+import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.databinding.ActivityCounterBinding
 
 class CounterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCounterBinding
-
+    private val viewModel : CounterViewModel by viewModels()
+    private var zikr : ZikrInfo? = null
     companion object {
         const val ZIKR_INFO = ""
         fun startFromMainActivity(activity: AppCompatActivity, zikr: ZikrInfo) {
@@ -22,17 +25,17 @@ class CounterActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCounterBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        val zikr = intent.getParcelableExtra<ZikrInfo>(ZIKR_INFO)
+        zikr = intent.getParcelableExtra<ZikrInfo>(ZIKR_INFO)
 
         zikr?.let {
-            binding.tvTasbehWordInside.text = zikr.zikr
+            binding.tvTasbehWordInside.text = it.zikr
+            binding.tvCounter.text = it.counter.toString()
         }
 
 
@@ -40,7 +43,7 @@ class CounterActivity : AppCompatActivity() {
         binding.btnForTap.setOnClickListener {
             clickedTimes++
 
-            binding.counter.text = clickedTimes.toString()
+            binding.tvCounter.text = clickedTimes.toString()
 
             binding.fluctuatedCircleUp.isVisible = false
             binding.fluctuatedCircleDown.isVisible = true
@@ -57,53 +60,36 @@ class CounterActivity : AppCompatActivity() {
             //vibrate
             if (clickedTimes % 100 == 0 || clickedTimes == 33) {
                 val vibrate = (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR_0_1) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     vibrate.vibrate(
                         VibrationEffect.createOneShot(
                             1000,
                             VibrationEffect.DEFAULT_AMPLITUDE
                         )
                     )
-                } else {
-                    vibrate.vibrate(1000)
                 }
             }
-            //sharPref
-            saveData()
         }
         binding.btnRefreshInsider.setOnClickListener {
             clickedTimes = 0
-            binding.counter.text = clickedTimes.toString()
+            binding.tvCounter.text = clickedTimes.toString()
         }
 
         binding.btnBack.setOnClickListener {
             finish()
         }
 
-        //sharedPreference
-        loadData()
         val mp = MediaPlayer.create(this, R.raw.subhanolloh)
         binding.btnPlay.setOnClickListener {
             mp.start()
         }
     }
 
-
-    private fun saveData() {
-        val insertedText = binding.counter.text.toString()
-        binding.counter.text = insertedText
-
-        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.apply {
-            putString("STRING_KEY", insertedText)
-        }.apply()
+    override fun onPause() {
+        if(zikr != null)
+            viewModel.updateCount(zikr!!.id, binding.tvCounter.text.toString().toInt())
+        super.onPause()
     }
 
-    private fun loadData() {
-        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
-        val savedString = sharedPreferences.getString("STRING_KEY", null)
 
-        binding.counter.text = savedString
-    }
 }

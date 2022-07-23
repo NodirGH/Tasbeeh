@@ -1,18 +1,18 @@
 package com.example.tasbeeh.data.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface ZikrDao {
     @Query("SELECT * FROM zikrentity")
     fun getAllZikrs(): LiveData<List<ZikrEntity>>
 
-    @Query("SELECT id FROM zikrentity")
-    fun getZikrCounts(): List<Int>
+    @Query("SELECT * FROM zikrentity")
+    suspend fun getZikrs(): List<ZikrEntity>
+
+    @Query("SELECT COUNT(id) FROM zikrentity")
+    suspend fun getZikrCount(): Int
 
     @Insert
     fun insert(zikr: ZikrEntity)
@@ -22,4 +22,7 @@ interface ZikrDao {
 
     @Delete
     fun delete(zikr: ZikrEntity)
+
+    @Query("update zikrentity set counter = :count  where id = :id")
+    suspend fun updateCount(id: Int, count: Int) : Int
 }
