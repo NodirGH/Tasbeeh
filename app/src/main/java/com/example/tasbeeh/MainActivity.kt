@@ -29,9 +29,9 @@ class MainActivity : AppCompatActivity() {
         zikrAdapter.callback = {
             CounterActivity.startFromMainActivity(this, it)
         }
+        val tasbeehViewModel = TasbehViewModel(application)
+        tasbeehViewModel.insertInitialData(this)
 
-        val tasbehViewModel = TasbehViewModel(application)
-        tasbehViewModel.insertInitialData(this)
 
         viewModel = ViewModelProvider(
             this,
@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.allZikr.observe(this, Observer { zikrs ->
             zikrAdapter.submitList(ZikrMapper.mapEntitiesToDtos(zikrs))
         })
-
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.setHasFixedSize(true)
@@ -70,10 +69,10 @@ class MainActivity : AppCompatActivity() {
                 )
                 if (zikrInfo.arabicWord.isNotEmpty() && zikrInfo.translation.isNotEmpty() && zikrInfo.zikr.isNotEmpty()){
                     viewModel.addZikr(zikrInfo)
+                    mAlertDialog.dismiss()
                 } else {
                     Toast.makeText(this, "Илтимос, Хамма қаторларни тўлдиринг", Toast.LENGTH_LONG).show()
                 }
-                mAlertDialog.dismiss()
             }
 
             bindingAddDialog.btnBackAlertDialog.setOnClickListener {

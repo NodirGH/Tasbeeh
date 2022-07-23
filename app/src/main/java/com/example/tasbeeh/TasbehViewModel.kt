@@ -32,7 +32,7 @@ class TasbehViewModel(application: Application) : AndroidViewModel(application) 
         viewModelScope.launch(Dispatchers.IO) {
             val zikrEntity = ZikrLocal.getLocalDB(context).zikrDao().getZikrCounts()
             if (
-                zikrEntity.isEmpty()) {
+                zikrEntity.isNullOrEmpty()) {
                 ZikrLocal.getLocalDB(context)
                     .zikrDao()
                     .insertAll(ZikrData.getZikrs().map { it.mapToEntity() })
