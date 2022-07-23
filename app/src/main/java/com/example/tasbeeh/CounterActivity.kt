@@ -2,6 +2,7 @@ package com.example.tasbeeh
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +14,7 @@ class CounterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCounterBinding
 
     companion object {
-        val ZIKR_INFO = ""
+        const val ZIKR_INFO = ""
         fun startFromMainActivity(activity: AppCompatActivity, zikr: ZikrInfo) {
             val intent = Intent(activity, CounterActivity::class.java)
             intent.putExtra(ZIKR_INFO, zikr)
@@ -81,6 +82,10 @@ class CounterActivity : AppCompatActivity() {
 
         //sharedPreference
         loadData()
+        val mp = MediaPlayer.create(this, R.raw.subhanolloh)
+        binding.btnPlay.setOnClickListener {
+            mp.start()
+        }
     }
 
 

@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class TasbehViewModel(application: Application) : AndroidViewModel(application) {
 
-    lateinit var allZikr: LiveData<List<ZikrEntity>>
+    var allZikr: LiveData<List<ZikrEntity>>
     private val repository: TasbehRepository
     var isSuccessful = MutableLiveData<Boolean>()
 
@@ -38,7 +38,6 @@ class TasbehViewModel(application: Application) : AndroidViewModel(application) 
                     .insertAll(ZikrData.getZikrs().map { it.mapToEntity() })
             }
         }
-
 
     fun deleteZikr(zikrEntity: ZikrEntity) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(zikrEntity)
