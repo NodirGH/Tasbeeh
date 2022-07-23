@@ -1,47 +1,55 @@
-package com.example.tasbeeh
+package com.example.tasbeeh.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tasbeeh.data.ZikrInfo
 import com.example.tasbeeh.data.mapper.ZikrMapper
+import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.databinding.ActivityMainBinding
 import com.example.tasbeeh.databinding.DialogAddZikrBinding
+import com.example.tasbeeh.ui.counter.CounterActivity
+import com.example.tasbeeh.utils.toast
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var zikrAdapter: ZikrAdapter
     private lateinit var bindingAddDialog: DialogAddZikrBinding
-    lateinit var viewModel: TasbehViewModel
+    val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel.insertInitialData()
+        viewModel.getZikrsLiveData()
+
         zikrAdapter = ZikrAdapter()
         zikrAdapter.callback = {
             CounterActivity.startFromMainActivity(this, it)
         }
 
-        val tasbehViewModel = TasbehViewModel(application)
-        tasbehViewModel.insertInitialData(this)
 
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        )[TasbehViewModel::class.java]
 
-        viewModel.allZikr.observe(this, Observer { zikrs ->
+
+        viewModel.errorMessage.observe(this, Observer {
+            toast(it)
+        })
+
+        viewModel.zikrsLocalLive?.observe(this, Observer { zikrs ->
             zikrAdapter.submitList(ZikrMapper.mapEntitiesToDtos(zikrs))
         })
 
+
+        viewModel.zikrs.observe(this, Observer { zikrs ->
+            zikrAdapter.submitList(zikrs)
+        })
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.setHasFixedSize(true)
@@ -70,10 +78,11 @@ class MainActivity : AppCompatActivity() {
                 )
                 if (zikrInfo.arabicWord.isNotEmpty() && zikrInfo.translation.isNotEmpty() && zikrInfo.zikr.isNotEmpty()){
                     viewModel.addZikr(zikrInfo)
+                    mAlertDialog.dismiss()
                 } else {
+                    bindingAddDialog.etEnterArabicWord.error = "Илтимос, Хамма қаторларни тўлдиринг"
                     Toast.makeText(this, "Илтимос, Хамма қаторларни тўлдиринг", Toast.LENGTH_LONG).show()
                 }
-                mAlertDialog.dismiss()
             }
 
             bindingAddDialog.btnBackAlertDialog.setOnClickListener {

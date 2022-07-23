@@ -1,5 +1,7 @@
 package com.example.tasbeeh.data
 
+import com.example.tasbeeh.model.ZikrInfo
+
 class ZikrData {
     companion object {
         fun getZikrs(): List<ZikrInfo> {

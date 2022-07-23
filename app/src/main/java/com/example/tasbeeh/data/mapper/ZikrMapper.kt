@@ -1,6 +1,6 @@
 package com.example.tasbeeh.data.mapper
 
-import com.example.tasbeeh.data.ZikrInfo
+import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.data.local.ZikrEntity
 
 class ZikrMapper {

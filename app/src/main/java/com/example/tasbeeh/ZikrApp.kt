@@ -7,7 +7,7 @@ class ZikrApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        ZikrLocal.initDatabase(this)
     }
 
 }

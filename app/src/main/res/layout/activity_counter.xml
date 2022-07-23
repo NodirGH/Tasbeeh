@@ -38,7 +38,7 @@
         app:tint="#ffffff" />
 
     <TextView
-        android:id="@+id/counter"
+        android:id="@+id/tvCounter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="60sp"
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/counter" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCounter" />
 
     <ImageView
         android:id="@+id/circleTwoUp"
@@ -128,7 +128,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/counter"
+        app:layout_constraintTop_toBottomOf="@id/tvCounter"
         app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
