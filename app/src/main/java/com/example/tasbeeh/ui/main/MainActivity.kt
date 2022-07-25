@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasbeeh.data.mapper.ZikrMapper
-import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.databinding.ActivityMainBinding
 import com.example.tasbeeh.databinding.DialogAddZikrBinding
+import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.ui.counter.CounterActivity
 import com.example.tasbeeh.utils.toast
 
