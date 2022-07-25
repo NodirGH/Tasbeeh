@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = zikrAdapter
 
-        //alert dialog
         viewModel.isSuccessful.observe(this, Observer { isSuccessful ->
             if (isSuccessful)
                 Toast.makeText(this, "Зикр қўшилди", Toast.LENGTH_SHORT).show()
@@ -71,23 +70,40 @@ class MainActivity : AppCompatActivity() {
             val mAlertDialog = mBuilder.show()
 
             bindingAddDialog.btnAddAlertDialog.setOnClickListener {
-                val zikrInfo = ZikrInfo(
-                    arabicWord = bindingAddDialog.etEnterArabicWord.text.toString(),
-                    zikr = bindingAddDialog.etEnterZikrWord.text.toString(),
-                    translation = bindingAddDialog.etEnterMeaningWord.text.toString()
-                )
-                if (zikrInfo.arabicWord.isNotEmpty() && zikrInfo.translation.isNotEmpty() && zikrInfo.zikr.isNotEmpty()){
-                    viewModel.addZikr(zikrInfo)
+
+                if (bindingAddDialog.etEnterArabicWord.text.isNotEmpty()
+                    && bindingAddDialog.etEnterMeaningWord.text.isNotEmpty()
+                    && bindingAddDialog.etEnterZikrWord.text.isNotEmpty()
+                ) {
+                    viewModel.addZikr(
+                        ZikrInfo(
+                            arabicWord = bindingAddDialog.etEnterArabicWord.text.toString(),
+                            zikr = bindingAddDialog.etEnterZikrWord.text.toString(),
+                            translation = bindingAddDialog.etEnterMeaningWord.text.toString()
+                        )
+                    )
                     mAlertDialog.dismiss()
                 } else {
-                    bindingAddDialog.etEnterArabicWord.error = "Илтимос, Хамма қаторларни тўлдиринг"
-                    Toast.makeText(this, "Илтимос, Хамма қаторларни тўлдиринг", Toast.LENGTH_LONG).show()
+
+                    if (bindingAddDialog.etEnterArabicWord.text.isEmpty()) {
+                        bindingAddDialog.etEnterArabicWord.error = "Арабча матнни киритинг"
+                    }
+
+                    if (bindingAddDialog.etEnterZikrWord.text.isEmpty()) {
+                        bindingAddDialog.etEnterZikrWord.error = "Кирилча матнни киритинг"
+                    }
+
+                    if (bindingAddDialog.etEnterMeaningWord.text.isEmpty()) {
+                        bindingAddDialog.etEnterMeaningWord.error = "Маъносини киритинг"
+                    }
                 }
             }
 
-            bindingAddDialog.btnBackAlertDialog.setOnClickListener {
-                mAlertDialog.dismiss()
-            }
+                bindingAddDialog.btnBackAlertDialog.setOnClickListener {
+                    mAlertDialog.dismiss()
+                }
+
+
         }
     }
 }
