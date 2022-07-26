@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tasbeeh.data.mapper.ZikrMapper
 import com.example.tasbeeh.databinding.ActivityMainBinding
 import com.example.tasbeeh.databinding.DialogAddZikrBinding
+import com.example.tasbeeh.databinding.ItemOrderBinding
 import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.ui.counter.CounterActivity
 import com.example.tasbeeh.utils.toast
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var zikrAdapter: ZikrAdapter
     private lateinit var bindingAddDialog: DialogAddZikrBinding
+    private lateinit var bindingItemOrder: ItemOrderBinding
     val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,11 +101,24 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-                bindingAddDialog.btnBackAlertDialog.setOnClickListener {
-                    mAlertDialog.dismiss()
-                }
+            bindingAddDialog.btnBackAlertDialog.setOnClickListener {
+                mAlertDialog.dismiss()
+            }
+        }
 
+        bindingItemOrder =
+            ItemOrderBinding.inflate(LayoutInflater.from(this), binding.root, false)
+        bindingItemOrder.ibDelete.setOnClickListener {
+            val alertDialog =  AlertDialog.Builder(this)
+            alertDialog.setTitle("Ushbu zikrni o'chirmoqchimisiz")
+            alertDialog.setPositiveButton("Ha"){_,_ ->
+            }
+            alertDialog.setNegativeButton("Yoq"){_,_ ->}
+            alertDialog.create().show()
+        }
 
+        bindingItemOrder.ibRefresh.setOnClickListener {
+            Toast.makeText(this,"Refreshed", Toast.LENGTH_LONG).show()
         }
     }
 }

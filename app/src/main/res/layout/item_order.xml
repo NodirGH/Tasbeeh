@@ -42,7 +42,7 @@
             <ImageButton
                 android:id="@+id/ibDelete"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_delete"
@@ -50,7 +50,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackgroundBorderless"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:tint="@color/main" />
 
         </LinearLayout>
@@ -109,7 +109,7 @@
                 android:id="@+id/ibRefresh"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="50dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="#00ACA0A0"
                 android:clickable="true"
