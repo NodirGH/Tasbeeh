@@ -10,7 +10,8 @@ import com.example.tasbeeh.utils.manageVisibility
 class ZikrAdapter() : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
 
     var callback: ((ZikrInfo) -> Unit)? = null
-    var callbackDelete: ((Int) -> Unit)? = null
+    var callbackID: ((Int) -> Unit)? = null
+    var callbackRefresh: ((Int, Int)-> Unit)? = null
     private var zikrs: List<ZikrInfo>? = null
 
     fun submitList(zikrs: List<ZikrInfo>) {
@@ -44,7 +45,11 @@ class ZikrAdapter() : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
             binding.ibDelete.manageVisibility(zikrInfo.isDeletable)
             binding.root.setOnClickListener { callback?.invoke(zikrInfo) }
             binding.ibDelete.setOnClickListener {
-                callbackDelete?.invoke(zikrInfo.id)
+                callbackID?.invoke(zikrInfo.id)
+            }
+            binding.ibRefresh.setOnClickListener {
+                callbackRefresh?.invoke(zikrInfo.id, binding.tvZikrCounter.text.toString().toInt()
+                )
             }
         }
     }

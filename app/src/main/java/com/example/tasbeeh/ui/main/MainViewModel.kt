@@ -50,4 +50,11 @@ class MainViewModel constructor(private val repository: TasbehRepository = Tasbe
             isSuccessful.postValue(false)
         }
     }
+
+    fun refreshZikrsCount(id: Int, count: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.refreshZikrCount(id, count)
+        }
+    }
+
 }

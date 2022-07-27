@@ -6,9 +6,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tasbeeh.data.local.ZikrEntity
 import com.example.tasbeeh.data.mapper.ZikrMapper
 import com.example.tasbeeh.databinding.ActivityMainBinding
 import com.example.tasbeeh.databinding.DialogAddZikrBinding
@@ -21,9 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var zikrAdapter: ZikrAdapter
     private lateinit var bindingAddDialog: DialogAddZikrBinding
-    private val zikrEntity: ZikrEntity? = null
-    private var zikr: ZikrEntity? = null
-    val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,30 +37,30 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        viewModel.errorMessage.observe(this, Observer {
+        viewModel.errorMessage.observe(this) {
             toast(it)
-        })
+        }
 
-        viewModel.zikrsLocalLive?.observe(this, Observer { zikrs ->
+        viewModel.zikrsLocalLive?.observe(this) { zikrs ->
             zikrAdapter.submitList(ZikrMapper.mapEntitiesToDtos(zikrs))
-        })
+        }
 
 
-        viewModel.zikrs.observe(this, Observer { zikrs ->
+        viewModel.zikrs.observe(this) { zikrs ->
             zikrAdapter.submitList(zikrs)
-        })
+        }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = zikrAdapter
 
-        viewModel.isSuccessful.observe(this, Observer { isSuccessful ->
+        viewModel.isSuccessful.observe(this) { isSuccessful ->
             if (isSuccessful)
                 Toast.makeText(this, "Зикр қўшилди", Toast.LENGTH_SHORT).show()
             else
                 Toast.makeText(this, "Хатолик бор", Toast.LENGTH_SHORT).show()
 
-        })
+        }
         binding.llAddTasbehWord.setOnClickListener {
             bindingAddDialog =
                 DialogAddZikrBinding.inflate(LayoutInflater.from(this), binding.root, false)
@@ -107,16 +103,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        zikrAdapter.callbackDelete = { id -> alertDialog(id) }
+        zikrAdapter.callbackID = { id -> alertDialog(id) }
+
+        zikrAdapter.callbackRefresh = {id, _ -> refreshCount(id)}
     }
 
-    fun alertDialog(id: Int) {
+    private fun alertDialog(id: Int) {
         val alertDialog = AlertDialog.Builder(this)
-        alertDialog.setTitle("Ushbu zikrni o'chirmoqchimisiz")
-        alertDialog.setPositiveButton("Ha") { _, _ ->
+        alertDialog.setTitle("Ушбу зикрни ўчирмоқчимисиз?")
+        alertDialog.setPositiveButton("Ха") { _, _ ->
                viewModel.deleteZikr(id)
         }
-        alertDialog.setNegativeButton("Yoq") { _, _ -> }
+        alertDialog.setNegativeButton("Бекор қилиш") { _, _ -> }
         alertDialog.create().show()
+    }
+
+    private fun refreshCount(id: Int){
+        viewModel.refreshZikrsCount(id, 0)
     }
 }

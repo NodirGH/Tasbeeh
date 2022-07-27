@@ -26,6 +26,11 @@ class TasbehRepository(private val zikrDao: ZikrDao = ZikrLocal.zikrDatabase.zik
     suspend fun updateZikrCount(id : Int, count : Int){
         zikrDao.updateCount(id, count)
     }
+
+    suspend fun refreshZikrCount(id: Int, count: Int){
+        zikrDao.refreshZikr(id, count)
+    }
+
     suspend fun insert(zikrInfo: ZikrInfo) {
         zikrDao.insert(zikrInfo.mapToEntity())
     }
