@@ -5,12 +5,12 @@ import android.content.Intent
 import android.media.MediaPlayer
 import android.os.*
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.tasbeeh.R
-import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.databinding.ActivityCounterBinding
+import com.example.tasbeeh.model.ZikrInfo
+import com.example.tasbeeh.utils.manageVisibility
 
 class CounterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCounterBinding
@@ -79,6 +79,10 @@ class CounterActivity : AppCompatActivity() {
             finish()
         }
 
+        if (zikr!!.isDeletable){
+            binding.btnPlay.manageVisibility(false)
+        }
+
         val mp = MediaPlayer.create(this, R.raw.subhanolloh)
         binding.btnPlay.setOnClickListener {
             mp.start()
@@ -90,6 +94,7 @@ class CounterActivity : AppCompatActivity() {
             viewModel.updateCount(zikr!!.id, binding.tvCounter.text.toString().toInt())
         super.onPause()
     }
+
 
 
 }

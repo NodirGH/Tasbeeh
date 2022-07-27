@@ -48,10 +48,11 @@
         android:text="0"
         android:textColor="@color/black"
         android:textSize="50sp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnPlay" />
+        app:layout_constraintTop_toBottomOf="@id/tvTasbehWordInside" />
 
     <ImageView
         android:id="@+id/cirleOneUp"
