@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.Toast
 
 fun Context.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this, "", length).show()
+    Toast.makeText(this, message, length).show()
 }
 
 fun View.manageVisibility(isVisible :Boolean){

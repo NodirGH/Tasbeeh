@@ -24,7 +24,11 @@ interface ZikrDao {
     fun insertAll(zikr: List<ZikrEntity>)
 
     @Delete
-    fun delete(zikr: ZikrEntity)
+    fun deletee(zikr: ZikrEntity)
+
+    @Query("DELETE FROM zikrentity WHERE id = :id")
+    fun delete(id: Int)
+
 
     @Query("update zikrentity set counter = :count  where id = :id")
     suspend fun updateCount(id: Int, count: Int) : Int

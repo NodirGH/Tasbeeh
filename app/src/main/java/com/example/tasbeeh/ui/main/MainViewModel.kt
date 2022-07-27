@@ -1,11 +1,13 @@
 package com.example.tasbeeh.ui.main
 
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.tasbeeh.data.TasbehRepository
-import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.data.local.ZikrEntity
-import com.example.tasbeeh.data.mapper.ZikrMapper
+import com.example.tasbeeh.model.ZikrInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -35,8 +37,8 @@ class MainViewModel constructor(private val repository: TasbehRepository = Tasbe
     }
 
 
-    fun deleteZikr(zikrEntity: ZikrEntity) = viewModelScope.launch(Dispatchers.IO) {
-        repository.delete(zikrEntity)
+    fun deleteZikr(id: Int) = viewModelScope.launch(Dispatchers.IO) {
+        repository.delete(id)
     }
 
     fun addZikr(zikrInfo: ZikrInfo) = viewModelScope.launch(Dispatchers.IO) {
@@ -45,7 +47,6 @@ class MainViewModel constructor(private val repository: TasbehRepository = Tasbe
             isSuccessful.postValue(true)
         } catch (e: Exception) {
             Log.d("ErrorAddDB", e.message.toString())
-            //Todo error handling with messageLiveData
             isSuccessful.postValue(false)
         }
     }

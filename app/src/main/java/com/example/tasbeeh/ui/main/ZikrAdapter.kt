@@ -3,13 +3,14 @@ package com.example.tasbeeh.ui.main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.databinding.ItemOrderBinding
+import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.utils.manageVisibility
 
 class ZikrAdapter() : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
 
     var callback: ((ZikrInfo) -> Unit)? = null
+    var callbackDelete: ((Int) -> Unit)? = null
     private var zikrs: List<ZikrInfo>? = null
 
     fun submitList(zikrs: List<ZikrInfo>) {
@@ -42,6 +43,9 @@ class ZikrAdapter() : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
             binding.tvZikrCounter.text = zikrInfo.counter.toString()
             binding.ibDelete.manageVisibility(zikrInfo.isDeletable)
             binding.root.setOnClickListener { callback?.invoke(zikrInfo) }
+            binding.ibDelete.setOnClickListener {
+                callbackDelete?.invoke(zikrInfo.id)
+            }
         }
     }
 }

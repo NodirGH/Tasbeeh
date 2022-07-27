@@ -8,10 +8,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tasbeeh.data.local.ZikrEntity
 import com.example.tasbeeh.data.mapper.ZikrMapper
 import com.example.tasbeeh.databinding.ActivityMainBinding
 import com.example.tasbeeh.databinding.DialogAddZikrBinding
-import com.example.tasbeeh.databinding.ItemOrderBinding
 import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.ui.counter.CounterActivity
 import com.example.tasbeeh.utils.toast
@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var zikrAdapter: ZikrAdapter
     private lateinit var bindingAddDialog: DialogAddZikrBinding
-    private lateinit var bindingItemOrder: ItemOrderBinding
+    private val zikrEntity: ZikrEntity? = null
+    private var zikr: ZikrEntity? = null
     val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,19 +107,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        bindingItemOrder =
-            ItemOrderBinding.inflate(LayoutInflater.from(this), binding.root, false)
-        bindingItemOrder.ibDelete.setOnClickListener {
-            val alertDialog =  AlertDialog.Builder(this)
-            alertDialog.setTitle("Ushbu zikrni o'chirmoqchimisiz")
-            alertDialog.setPositiveButton("Ha"){_,_ ->
-            }
-            alertDialog.setNegativeButton("Yoq"){_,_ ->}
-            alertDialog.create().show()
-        }
+        zikrAdapter.callbackDelete = { id -> alertDialog(id) }
+    }
 
-        bindingItemOrder.ibRefresh.setOnClickListener {
-            Toast.makeText(this,"Refreshed", Toast.LENGTH_LONG).show()
+    fun alertDialog(id: Int) {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle("Ushbu zikrni o'chirmoqchimisiz")
+        alertDialog.setPositiveButton("Ha") { _, _ ->
+               viewModel.deleteZikr(id)
         }
+        alertDialog.setNegativeButton("Yoq") { _, _ -> }
+        alertDialog.create().show()
     }
 }

@@ -1,10 +1,10 @@
 package com.example.tasbeeh.data
 
 import androidx.lifecycle.LiveData
-import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.data.local.ZikrDao
 import com.example.tasbeeh.data.local.ZikrEntity
 import com.example.tasbeeh.data.local.ZikrLocal
+import com.example.tasbeeh.model.ZikrInfo
 
 class TasbehRepository(private val zikrDao: ZikrDao = ZikrLocal.zikrDatabase.zikrDao()) {
 
@@ -30,8 +30,8 @@ class TasbehRepository(private val zikrDao: ZikrDao = ZikrLocal.zikrDatabase.zik
         zikrDao.insert(zikrInfo.mapToEntity())
     }
 
-    suspend fun delete(zikrEntity: ZikrEntity) {
-        zikrDao.delete(zikrEntity)
+    suspend fun delete(id: Int) {
+        zikrDao.delete(id)
     }
 
     companion object {
