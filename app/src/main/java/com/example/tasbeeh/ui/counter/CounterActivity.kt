@@ -4,18 +4,23 @@ import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.*
+import android.view.LayoutInflater
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.tasbeeh.R
 import com.example.tasbeeh.databinding.ActivityCounterBinding
+import com.example.tasbeeh.databinding.DialogSettingBinding
 import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.utils.manageVisibility
 
 class CounterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCounterBinding
-    private val viewModel : CounterViewModel by viewModels()
-    private var zikr : ZikrInfo? = null
+    private lateinit var bindingDialogSetting: DialogSettingBinding
+    private val viewModel: CounterViewModel by viewModels()
+    private var zikr: ZikrInfo? = null
+
     companion object {
         const val ZIKR_INFO = ""
         fun startFromMainActivity(activity: AppCompatActivity, zikr: ZikrInfo) {
@@ -31,13 +36,12 @@ class CounterActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        zikr = intent.getParcelableExtra<ZikrInfo>(ZIKR_INFO)
+        zikr = intent.getParcelableExtra(ZIKR_INFO)
 
         zikr?.let {
             binding.tvTasbehWordInside.text = it.zikr
             binding.tvCounter.text = it.counter.toString()
         }
-
 
         var clickedTimes = 0
         binding.btnForTap.setOnClickListener {
@@ -79,7 +83,7 @@ class CounterActivity : AppCompatActivity() {
             finish()
         }
 
-        if (zikr!!.isDeletable){
+        if (zikr!!.isDeletable) {
             binding.btnPlay.manageVisibility(false)
         }
 
@@ -87,14 +91,52 @@ class CounterActivity : AppCompatActivity() {
         binding.btnPlay.setOnClickListener {
             mp.start()
         }
+
+        binding.btnSettings.setOnClickListener {
+            bindingDialogSetting =
+                DialogSettingBinding.inflate(LayoutInflater.from(this), binding.root, false)
+            val builder = AlertDialog.Builder(this)
+            builder.setView(bindingDialogSetting.root)
+            builder.create()
+            val alertDialog = builder.show()
+
+        bindingDialogSetting.ivYellowTasbeehSetting.setOnClickListener {
+            binding.cirleOneUp.setImageResource(R.drawable.single_yellow_stone)
+            binding.circleTwoUp.setImageResource(R.drawable.single_yellow_stone)
+            binding.circleThreeUp.setImageResource(R.drawable.single_yellow_stone)
+            binding.fluctuatedCircleUp.setImageResource(R.drawable.single_yellow_stone)
+            binding.fluctuatedCircleDown.setImageResource(R.drawable.single_yellow_stone)
+            binding.circleDown.setImageResource(R.drawable.single_yellow_stone)
+            alertDialog.dismiss()
+        }
+
+            bindingDialogSetting.ivRedTasbeehSetting.setOnClickListener {
+                binding.cirleOneUp.setImageResource(R.drawable.single_red_stone)
+                binding.circleTwoUp.setImageResource(R.drawable.single_red_stone)
+                binding.circleThreeUp.setImageResource(R.drawable.single_red_stone)
+                binding.fluctuatedCircleUp.setImageResource(R.drawable.single_red_stone)
+                binding.fluctuatedCircleDown.setImageResource(R.drawable.single_red_stone)
+                binding.circleDown.setImageResource(R.drawable.single_red_stone)
+                alertDialog.dismiss()
+            }
+
+            bindingDialogSetting.ivGreenTasbeehSetting.setOnClickListener {
+                binding.cirleOneUp.setImageResource(R.drawable.single_green_stone)
+                binding.circleTwoUp.setImageResource(R.drawable.single_green_stone)
+                binding.circleThreeUp.setImageResource(R.drawable.single_green_stone)
+                binding.fluctuatedCircleUp.setImageResource(R.drawable.single_green_stone)
+                binding.fluctuatedCircleDown.setImageResource(R.drawable.single_green_stone)
+                binding.circleDown.setImageResource(R.drawable.single_green_stone)
+                alertDialog.dismiss()
+            }
+        }
     }
 
     override fun onPause() {
-        if(zikr != null)
+        if (zikr != null)
             viewModel.updateCount(zikr!!.id, binding.tvCounter.text.toString().toInt())
         super.onPause()
     }
-
 
 
 }
