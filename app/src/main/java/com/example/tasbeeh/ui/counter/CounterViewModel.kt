@@ -14,7 +14,4 @@ class CounterViewModel constructor(private val repository: TasbehRepository = Ta
             repository.updateZikrCount(id, count)
         }
     }
-
-
-
 }

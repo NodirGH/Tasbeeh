@@ -24,8 +24,6 @@ class MainViewModel constructor(private val repository: TasbehRepository = Tasbe
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.insertInitialData()
-//                val localZikrs = repository.getZikrs()
-//                zikrs.postValue(ZikrMapper.mapEntitiesToDtos(localZikrs))
             }catch (e : Exception){
                 Log.d(MainViewModel::class.java.name, e.message.toString())
                 errorMessage.postValue(e.message)
@@ -56,5 +54,4 @@ class MainViewModel constructor(private val repository: TasbehRepository = Tasbe
             repository.refreshZikrCount(id, count)
         }
     }
-
 }

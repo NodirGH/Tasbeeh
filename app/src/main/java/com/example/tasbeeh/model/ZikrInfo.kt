@@ -11,7 +11,8 @@ data class ZikrInfo(
     val translation: String = "",
     val arabicWord: String = "",
     val counter: Int = 0,
-    var isDeletable: Boolean = true
+    var isDeletable: Boolean = true,
+    var zikrAudio: String = ""
 ) : Parcelable {
     fun mapToEntity(): ZikrEntity {
         return ZikrEntity(
@@ -19,7 +20,8 @@ data class ZikrInfo(
             translation = translation,
             arabicWord = arabicWord,
             counter = counter,
-            isDeletable = isDeletable
+            isDeletable = isDeletable,
+            zikrAudio = zikrAudio
         )
     }
 

@@ -9,7 +9,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.example.tasbeeh.R
 import com.example.tasbeeh.databinding.ActivityCounterBinding
 import com.example.tasbeeh.databinding.DialogSettingBinding
 import com.example.tasbeeh.model.ZikrInfo
@@ -18,6 +17,7 @@ import com.example.tasbeeh.utils.manageVisibility
 class CounterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCounterBinding
     private lateinit var bindingDialogSetting: DialogSettingBinding
+    private var mediaPlayer: MediaPlayer = MediaPlayer()
     private val viewModel: CounterViewModel by viewModels()
     private var zikr: ZikrInfo? = null
 
@@ -43,7 +43,7 @@ class CounterActivity : AppCompatActivity() {
             binding.tvCounter.text = it.counter.toString()
         }
 
-        var clickedTimes = 0
+        var clickedTimes = zikr!!.counter.toString().toInt()
         binding.btnForTap.setOnClickListener {
             clickedTimes++
 
@@ -87,9 +87,9 @@ class CounterActivity : AppCompatActivity() {
             binding.btnPlay.manageVisibility(false)
         }
 
-        val mp = MediaPlayer.create(this, R.raw.subhanolloh)
+        // button play audio
         binding.btnPlay.setOnClickListener {
-            mp.start()
+            play(zikr!!.zikrAudio)
         }
 
         binding.btnSettings.setOnClickListener {
@@ -100,36 +100,66 @@ class CounterActivity : AppCompatActivity() {
             builder.create()
             val alertDialog = builder.show()
 
+//            TODO should be moved into CounterViewModel
         bindingDialogSetting.ivYellowTasbeehSetting.setOnClickListener {
-            binding.cirleOneUp.setImageResource(R.drawable.single_yellow_stone)
-            binding.circleTwoUp.setImageResource(R.drawable.single_yellow_stone)
-            binding.circleThreeUp.setImageResource(R.drawable.single_yellow_stone)
-            binding.fluctuatedCircleUp.setImageResource(R.drawable.single_yellow_stone)
-            binding.fluctuatedCircleDown.setImageResource(R.drawable.single_yellow_stone)
-            binding.circleDown.setImageResource(R.drawable.single_yellow_stone)
-            alertDialog.dismiss()
+            saveDataSetting()
+//            binding.cirleOneUp.setImageResource(R.drawable.single_yellow_stone)
+//            binding.circleTwoUp.setImageResource(R.drawable.single_yellow_stone)
+//            binding.circleThreeUp.setImageResource(R.drawable.single_yellow_stone)
+//            binding.fluctuatedCircleUp.setImageResource(R.drawable.single_yellow_stone)
+//            binding.fluctuatedCircleDown.setImageResource(R.drawable.single_yellow_stone)
+//            binding.circleDown.setImageResource(R.drawable.single_yellow_stone)
+//            alertDialog.dismiss()
         }
-
-            bindingDialogSetting.ivRedTasbeehSetting.setOnClickListener {
-                binding.cirleOneUp.setImageResource(R.drawable.single_red_stone)
-                binding.circleTwoUp.setImageResource(R.drawable.single_red_stone)
-                binding.circleThreeUp.setImageResource(R.drawable.single_red_stone)
-                binding.fluctuatedCircleUp.setImageResource(R.drawable.single_red_stone)
-                binding.fluctuatedCircleDown.setImageResource(R.drawable.single_red_stone)
-                binding.circleDown.setImageResource(R.drawable.single_red_stone)
-                alertDialog.dismiss()
-            }
-
-            bindingDialogSetting.ivGreenTasbeehSetting.setOnClickListener {
-                binding.cirleOneUp.setImageResource(R.drawable.single_green_stone)
-                binding.circleTwoUp.setImageResource(R.drawable.single_green_stone)
-                binding.circleThreeUp.setImageResource(R.drawable.single_green_stone)
-                binding.fluctuatedCircleUp.setImageResource(R.drawable.single_green_stone)
-                binding.fluctuatedCircleDown.setImageResource(R.drawable.single_green_stone)
-                binding.circleDown.setImageResource(R.drawable.single_green_stone)
-                alertDialog.dismiss()
-            }
+//
+//            bindingDialogSetting.ivRedTasbeehSetting.setOnClickListener {
+//                binding.cirleOneUp.setImageResource(R.drawable.single_red_stone)
+//                binding.circleTwoUp.setImageResource(R.drawable.single_red_stone)
+//                binding.circleThreeUp.setImageResource(R.drawable.single_red_stone)
+//                binding.fluctuatedCircleUp.setImageResource(R.drawable.single_red_stone)
+//                binding.fluctuatedCircleDown.setImageResource(R.drawable.single_red_stone)
+//                binding.circleDown.setImageResource(R.drawable.single_red_stone)
+//                alertDialog.dismiss()
+//            }
+//
+//            bindingDialogSetting.ivGreenTasbeehSetting.setOnClickListener {
+//                binding.cirleOneUp.setImageResource(R.drawable.single_green_stone)
+//                binding.circleTwoUp.setImageResource(R.drawable.single_green_stone)
+//                binding.circleThreeUp.setImageResource(R.drawable.single_green_stone)
+//                binding.fluctuatedCircleUp.setImageResource(R.drawable.single_green_stone)
+//                binding.fluctuatedCircleDown.setImageResource(R.drawable.single_green_stone)
+//                binding.circleDown.setImageResource(R.drawable.single_green_stone)
+//                alertDialog.dismiss()
+//            }
         }
+    }
+
+    private fun saveDataSetting() {
+//        val zero = R.drawable.green_tasbeh
+//        val one = binding.cirleOneUp.setImageResource(R.drawable.single_yellow_stone)
+//        val two = binding.circleTwoUp.setImageResource(R.drawable.single_yellow_stone)
+//        binding.circleThreeUp.setImageResource(R.drawable.single_yellow_stone)
+//        binding.fluctuatedCircleUp.setImageResource(R.drawable.single_yellow_stone)
+//        binding.fluctuatedCircleDown.setImageResource(R.drawable.single_yellow_stone)
+//        binding.circleDown.setImageResource(R.drawable.single_yellow_stone)
+//
+//        val sharedPreferences = getSharedPreferences("sharedPref_YellowStone", Context.MODE_PRIVATE)
+//        val editor = sharedPreferences.edit()
+//        editor.apply{
+//            putInt("INTEGER_KEY", zero)
+//        }
+    }
+
+    private fun play(asset: String) {
+        try {
+            val audio = applicationContext.assets.openFd(asset)
+            mediaPlayer.setDataSource(audio.fileDescriptor, audio.startOffset, audio.length)
+            audio.close()
+            mediaPlayer.prepare()
+        } catch (e: Exception){
+            e.printStackTrace()
+        }
+        mediaPlayer.start()
     }
 
     override fun onPause() {

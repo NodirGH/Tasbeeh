@@ -1,7 +1,7 @@
 package com.example.tasbeeh.data.mapper
 
-import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.data.local.ZikrEntity
+import com.example.tasbeeh.model.ZikrInfo
 
 class ZikrMapper {
     companion object {
@@ -12,7 +12,8 @@ class ZikrMapper {
                 translation = zikrEntity.translation ?: "",
                 arabicWord = zikrEntity.arabicWord ?: "",
                 counter = zikrEntity.counter ?: 0,
-                isDeletable = zikrEntity.isDeletable ?: false
+                isDeletable = zikrEntity.isDeletable ?: false,
+                zikrAudio = zikrEntity.zikrAudio ?: ""
             )
         }
 
