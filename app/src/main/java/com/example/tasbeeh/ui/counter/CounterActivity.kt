@@ -3,7 +3,9 @@ package com.example.tasbeeh.ui.counter
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import android.os.*
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -14,6 +16,7 @@ import com.example.tasbeeh.databinding.ActivityCounterBinding
 import com.example.tasbeeh.databinding.DialogSettingBinding
 import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.utils.manageVisibility
+import com.example.tasbeeh.utils.vibratePhone
 
 class CounterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCounterBinding
@@ -53,7 +56,6 @@ class CounterActivity : AppCompatActivity() {
             binding.fluctuatedCircleUp.isVisible = false
             binding.fluctuatedCircleDown.isVisible = true
 
-            //postDelay
             val run = Runnable {
                 binding.fluctuatedCircleDown.isVisible = false
                 binding.fluctuatedCircleUp.isVisible = true
@@ -61,19 +63,10 @@ class CounterActivity : AppCompatActivity() {
             val handler = Handler(Looper.getMainLooper())
             handler.postDelayed(run, 100)
 
-
-            //vibrate
             if (clickedTimes % 100 == 0 || clickedTimes == 33) {
-                val vibrate = (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    vibrate.vibrate(
-                        VibrationEffect.createOneShot(
-                            1000,
-                            VibrationEffect.DEFAULT_AMPLITUDE
-                        )
-                    )
-                }
+                vibratePhone()
             }
+
         }
         binding.btnRefreshInsider.setOnClickListener {
             clickedTimes = 0
@@ -88,7 +81,6 @@ class CounterActivity : AppCompatActivity() {
             binding.btnPlay.manageVisibility(false)
         }
 
-        // button play audio
         binding.btnPlay.setOnClickListener {
             play(zikr!!.zikrAudio)
         }
@@ -102,17 +94,16 @@ class CounterActivity : AppCompatActivity() {
             builder.create()
             val alertDialog = builder.show()
 
-//            TODO should be moved into CounterViewModel
-        bindingDialogSetting.ivYellowTasbeehSetting.setOnClickListener {
+            bindingDialogSetting.ivYellowTasbeehSetting.setOnClickListener {
 //            saveDataSetting()
-            binding.cirleOneUp.setImageResource(R.drawable.single_yellow_stone)
-            binding.circleTwoUp.setImageResource(R.drawable.single_yellow_stone)
-            binding.circleThreeUp.setImageResource(R.drawable.single_yellow_stone)
-            binding.fluctuatedCircleUp.setImageResource(R.drawable.single_yellow_stone)
-            binding.fluctuatedCircleDown.setImageResource(R.drawable.single_yellow_stone)
-            binding.circleDown.setImageResource(R.drawable.single_yellow_stone)
-            alertDialog.dismiss()
-        }
+                binding.cirleOneUp.setImageResource(R.drawable.single_yellow_stone)
+                binding.circleTwoUp.setImageResource(R.drawable.single_yellow_stone)
+                binding.circleThreeUp.setImageResource(R.drawable.single_yellow_stone)
+                binding.fluctuatedCircleUp.setImageResource(R.drawable.single_yellow_stone)
+                binding.fluctuatedCircleDown.setImageResource(R.drawable.single_yellow_stone)
+                binding.circleDown.setImageResource(R.drawable.single_yellow_stone)
+                alertDialog.dismiss()
+            }
 
             bindingDialogSetting.ivRedTasbeehSetting.setOnClickListener {
                 binding.cirleOneUp.setImageResource(R.drawable.single_red_stone)
@@ -144,7 +135,7 @@ class CounterActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("sharedPref_YellowStone", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.apply{
+        editor.apply {
             putInt("Yellow", R.drawable.single_yellow_stone)
         }.apply()
     }
@@ -155,7 +146,7 @@ class CounterActivity : AppCompatActivity() {
             mediaPlayer.setDataSource(audio.fileDescriptor, audio.startOffset, audio.length)
             audio.close()
             mediaPlayer.prepare()
-        } catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         mediaPlayer.start()
