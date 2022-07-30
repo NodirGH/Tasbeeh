@@ -58,7 +58,7 @@ class CounterActivity : AppCompatActivity() {
                 binding.fluctuatedCircleDown.isVisible = false
                 binding.fluctuatedCircleUp.isVisible = true
             }
-            val handler = Handler()
+            val handler = Handler(Looper.getMainLooper())
             handler.postDelayed(run, 100)
 
 
