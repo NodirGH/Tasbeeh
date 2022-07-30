@@ -66,7 +66,6 @@ class CounterActivity : AppCompatActivity() {
             if (clickedTimes % 100 == 0 || clickedTimes == 33) {
                 vibratePhone()
             }
-
         }
         binding.btnRefreshInsider.setOnClickListener {
             clickedTimes = 0
@@ -85,7 +84,7 @@ class CounterActivity : AppCompatActivity() {
             play(zikr!!.zikrAudio)
         }
 
-//        loadDataSetting()
+        loadDataSetting()
         binding.btnSettings.setOnClickListener {
             bindingDialogSetting =
                 DialogSettingBinding.inflate(LayoutInflater.from(this), binding.root, false)
@@ -95,49 +94,48 @@ class CounterActivity : AppCompatActivity() {
             val alertDialog = builder.show()
 
             bindingDialogSetting.ivYellowTasbeehSetting.setOnClickListener {
-//            saveDataSetting()
-                binding.cirleOneUp.setImageResource(R.drawable.single_yellow_stone)
-                binding.circleTwoUp.setImageResource(R.drawable.single_yellow_stone)
-                binding.circleThreeUp.setImageResource(R.drawable.single_yellow_stone)
-                binding.fluctuatedCircleUp.setImageResource(R.drawable.single_yellow_stone)
-                binding.fluctuatedCircleDown.setImageResource(R.drawable.single_yellow_stone)
-                binding.circleDown.setImageResource(R.drawable.single_yellow_stone)
+                val yellowStone = R.drawable.single_yellow_stone
+                saveDataSetting(yellowStone)
                 alertDialog.dismiss()
             }
 
             bindingDialogSetting.ivRedTasbeehSetting.setOnClickListener {
-                binding.cirleOneUp.setImageResource(R.drawable.single_red_stone)
-                binding.circleTwoUp.setImageResource(R.drawable.single_red_stone)
-                binding.circleThreeUp.setImageResource(R.drawable.single_red_stone)
-                binding.fluctuatedCircleUp.setImageResource(R.drawable.single_red_stone)
-                binding.fluctuatedCircleDown.setImageResource(R.drawable.single_red_stone)
-                binding.circleDown.setImageResource(R.drawable.single_red_stone)
+                val redStone = R.drawable.single_red_stone
+                saveDataSetting(redStone)
                 alertDialog.dismiss()
             }
 
             bindingDialogSetting.ivGreenTasbeehSetting.setOnClickListener {
-                binding.cirleOneUp.setImageResource(R.drawable.single_green_stone)
-                binding.circleTwoUp.setImageResource(R.drawable.single_green_stone)
-                binding.circleThreeUp.setImageResource(R.drawable.single_green_stone)
-                binding.fluctuatedCircleUp.setImageResource(R.drawable.single_green_stone)
-                binding.fluctuatedCircleDown.setImageResource(R.drawable.single_green_stone)
-                binding.circleDown.setImageResource(R.drawable.single_green_stone)
+                val greenStone = R.drawable.single_green_stone
+                saveDataSetting(greenStone)
                 alertDialog.dismiss()
             }
         }
     }
 
     private fun loadDataSetting() {
-
+        val sharedPreferences = getSharedPreferences("TASBEH_STONES", Context.MODE_PRIVATE)
+        val savedInteger = sharedPreferences.getInt("CHANGE_COLOR", 0)
+        binding.cirleOneUp.setImageResource(savedInteger)
+        binding.circleTwoUp.setImageResource(savedInteger)
+        binding.circleThreeUp.setImageResource(savedInteger)
+        binding.fluctuatedCircleUp.setImageResource(savedInteger)
+        binding.fluctuatedCircleDown.setImageResource(savedInteger)
+        binding.circleDown.setImageResource(savedInteger)
     }
 
-    private fun saveDataSetting() {
-
-        val sharedPreferences = getSharedPreferences("sharedPref_YellowStone", Context.MODE_PRIVATE)
+    private fun saveDataSetting(drawable: Int) {
+        val sharedPreferences = getSharedPreferences("TASBEH_STONES", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.apply {
-            putInt("Yellow", R.drawable.single_yellow_stone)
+            putInt("CHANGE_COLOR", drawable)
         }.apply()
+        binding.cirleOneUp.setImageResource(drawable)
+        binding.circleTwoUp.setImageResource(drawable)
+        binding.circleThreeUp.setImageResource(drawable)
+        binding.fluctuatedCircleUp.setImageResource(drawable)
+        binding.fluctuatedCircleDown.setImageResource(drawable)
+        binding.circleDown.setImageResource(drawable)
     }
 
     private fun play(asset: String) {
@@ -157,6 +155,4 @@ class CounterActivity : AppCompatActivity() {
             viewModel.updateCount(zikr!!.id, binding.tvCounter.text.toString().toInt())
         super.onPause()
     }
-
-
 }
