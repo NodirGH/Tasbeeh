@@ -11,14 +11,14 @@ fun Context.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, length).show()
 }
 
-fun View.manageVisibility(isVisible :Boolean){
-    if(isVisible)
+fun View.manageVisibility(isVisible: Boolean) {
+    if (isVisible)
         this.visibility = View.VISIBLE
     else
         this.visibility = View.GONE
 }
 
-fun Context.vibratePhone(){
+fun Context.vibratePhone() {
     @Suppress("DEPRECATION")
     val vibrate = (getSystemService(Context.VIBRATOR_SERVICE) as Vibrator)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

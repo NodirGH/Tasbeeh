@@ -11,6 +11,6 @@ data class ZikrEntity(
     @ColumnInfo(name = "translation") val translation: String?,
     @ColumnInfo(name = "arabicWord") val arabicWord: String?,
     @ColumnInfo(name = "counter") val counter: Int?,
-    @ColumnInfo(name = "isDeletable") val isDeletable : Boolean?,
-    @ColumnInfo(name = "zikrAudio") val zikrAudio : String?
+    @ColumnInfo(name = "isDeletable") val isDeletable: Boolean?,
+    @ColumnInfo(name = "zikrAudio") val zikrAudio: String?
 )

@@ -93,12 +93,11 @@ class CounterActivity : AppCompatActivity() {
             builder.create()
             val alertDialog = builder.show()
 
-            bindingDialogSetting.ivYellowTasbeehSetting.setOnClickListener {
-                val yellowStone = R.drawable.single_yellow_stone
-                saveDataSetting(yellowStone)
+            bindingDialogSetting.ivOrangeTasbeehSetting.setOnClickListener {
+                val orangeStone = R.drawable.single_orange_stone
+                saveDataSetting(orangeStone)
                 alertDialog.dismiss()
             }
-
             bindingDialogSetting.ivRedTasbeehSetting.setOnClickListener {
                 val redStone = R.drawable.single_red_stone
                 saveDataSetting(redStone)
@@ -116,8 +115,9 @@ class CounterActivity : AppCompatActivity() {
     private fun loadDataSetting() {
         val sharedPreferences = getSharedPreferences("TASBEH_STONES", Context.MODE_PRIVATE)
         val savedInteger = sharedPreferences.getInt("CHANGE_COLOR", 0)
-        binding.cirleOneUp.setImageResource(savedInteger)
+
         binding.circleTwoUp.setImageResource(savedInteger)
+        binding.cirleOneUp.setImageResource(savedInteger)
         binding.circleThreeUp.setImageResource(savedInteger)
         binding.fluctuatedCircleUp.setImageResource(savedInteger)
         binding.fluctuatedCircleDown.setImageResource(savedInteger)

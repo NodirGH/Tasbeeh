@@ -24,5 +24,4 @@ data class ZikrInfo(
             zikrAudio = zikrAudio
         )
     }
-
 }

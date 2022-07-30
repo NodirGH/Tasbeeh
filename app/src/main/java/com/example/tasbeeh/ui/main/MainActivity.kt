@@ -34,9 +34,6 @@ class MainActivity : AppCompatActivity() {
             CounterActivity.startFromMainActivity(this, it)
         }
 
-
-
-
         viewModel.errorMessage.observe(this) {
             toast(it)
         }
@@ -44,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.zikrsLocalLive?.observe(this) { zikrs ->
             zikrAdapter.submitList(ZikrMapper.mapEntitiesToDtos(zikrs))
         }
-
 
         viewModel.zikrs.observe(this) { zikrs ->
             zikrAdapter.submitList(zikrs)
@@ -105,20 +101,20 @@ class MainActivity : AppCompatActivity() {
 
         zikrAdapter.callbackID = { id -> alertDialog(id) }
 
-        zikrAdapter.callbackRefresh = {id, _ -> refreshCount(id)}
+        zikrAdapter.callbackRefresh = { id, _ -> refreshCount(id) }
     }
 
     private fun alertDialog(id: Int) {
         val alertDialog = AlertDialog.Builder(this)
         alertDialog.setTitle("Ушбу зикрни ўчирмоқчимисиз?")
         alertDialog.setPositiveButton("Ха") { _, _ ->
-               viewModel.deleteZikr(id)
+            viewModel.deleteZikr(id)
         }
         alertDialog.setNegativeButton("Бекор қилиш") { _, _ -> }
         alertDialog.create().show()
     }
 
-    private fun refreshCount(id: Int){
+    private fun refreshCount(id: Int) {
         viewModel.refreshZikrsCount(id, 0)
     }
 }

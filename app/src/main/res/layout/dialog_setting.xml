@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/iv_yellow_tasbeeh_setting"
+        android:id="@+id/iv_orange_tasbeeh_setting"
         android:layout_width="260dp"
         android:layout_height="80dp"
         android:layout_marginTop="10dp"
@@ -32,7 +32,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/yellow_tasbeh"
+        android:src="@drawable/orange_tasbeh"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_yellow_tasbeeh_setting" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_orange_tasbeeh_setting" />
 
     <ImageView
         android:id="@+id/ivGreen_tasbeehSetting"

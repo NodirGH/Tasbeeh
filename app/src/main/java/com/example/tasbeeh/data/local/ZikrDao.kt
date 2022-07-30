@@ -26,7 +26,7 @@ interface ZikrDao {
     fun delete(id: Int)
 
     @Query("update zikrentity set counter = :count  where id = :id")
-    suspend fun updateCount(id: Int, count: Int) : Int
+    suspend fun updateCount(id: Int, count: Int): Int
 
     @Query("UPDATE zikrentity set counter = :count WHERE id = :id")
     suspend fun refreshZikr(id: Int, count: Int): Int

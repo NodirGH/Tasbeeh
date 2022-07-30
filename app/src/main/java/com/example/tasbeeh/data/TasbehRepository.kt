@@ -10,37 +10,32 @@ class TasbehRepository(private val zikrDao: ZikrDao = ZikrLocal.zikrDatabase.zik
 
     val allZikrs: LiveData<List<ZikrEntity>> = zikrDao.getAllZikrs()
 
-
-    suspend fun insertInitialData(){
+    suspend fun insertInitialData() {
         val dbItemCount = zikrDao.getZikrCount()
-        if(dbItemCount == 0){
+        if (dbItemCount == 0) {
             val initialData = ZikrData.getZikrs().map { it.mapToEntity() }
             zikrDao.insertAll(initialData)
         }
     }
 
-    suspend fun getZikrs() : List<ZikrEntity> {
-        return zikrDao.getZikrs()
-    }
-
-    suspend fun updateZikrCount(id : Int, count : Int){
+    suspend fun updateZikrCount(id: Int, count: Int) {
         zikrDao.updateCount(id, count)
     }
 
-    suspend fun refreshZikrCount(id: Int, count: Int){
+    suspend fun refreshZikrCount(id: Int, count: Int) {
         zikrDao.refreshZikr(id, count)
     }
 
-    suspend fun insert(zikrInfo: ZikrInfo) {
+    fun insert(zikrInfo: ZikrInfo) {
         zikrDao.insert(zikrInfo.mapToEntity())
     }
 
-    suspend fun delete(id: Int) {
+    fun delete(id: Int) {
         zikrDao.delete(id)
     }
 
     companion object {
-        fun getInstance() : TasbehRepository{
+        fun getInstance(): TasbehRepository {
             return TasbehRepository()
         }
     }

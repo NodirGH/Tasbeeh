@@ -11,7 +11,7 @@ class ZikrAdapter() : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
 
     var callback: ((ZikrInfo) -> Unit)? = null
     var callbackID: ((Int) -> Unit)? = null
-    var callbackRefresh: ((Int, Int)-> Unit)? = null
+    var callbackRefresh: ((Int, Int) -> Unit)? = null
     private var zikrs: List<ZikrInfo>? = null
 
     fun submitList(zikrs: List<ZikrInfo>) {
@@ -48,7 +48,8 @@ class ZikrAdapter() : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
                 callbackID?.invoke(zikrInfo.id)
             }
             binding.ibRefresh.setOnClickListener {
-                callbackRefresh?.invoke(zikrInfo.id, binding.tvZikrCounter.text.toString().toInt()
+                callbackRefresh?.invoke(
+                    zikrInfo.id, binding.tvZikrCounter.text.toString().toInt()
                 )
             }
         }

@@ -15,6 +15,5 @@ class ZikrLocal {
                 .allowMainThreadQueries() // TODO remove to use Coroutines
                 .build()
         }
-
     }
 }

@@ -18,22 +18,22 @@ class MainViewModel constructor(private val repository: TasbehRepository = Tasbe
     var isSuccessful = MutableLiveData<Boolean>()
     var errorMessage = MutableLiveData<String>()
     var zikrs = MutableLiveData<List<ZikrInfo>>()
-    var zikrsLocalLive : LiveData<List<ZikrEntity>>? = null
+    var zikrsLocalLive: LiveData<List<ZikrEntity>>? = null
 
     fun insertInitialData() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 repository.insertInitialData()
-            }catch (e : Exception){
+            } catch (e: Exception) {
                 Log.d(MainViewModel::class.java.name, e.message.toString())
                 errorMessage.postValue(e.message)
             }
         }
     }
-    fun getZikrsLiveData(){
+
+    fun getZikrsLiveData() {
         zikrsLocalLive = repository.allZikrs
     }
-
 
     fun deleteZikr(id: Int) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(id)
@@ -49,7 +49,7 @@ class MainViewModel constructor(private val repository: TasbehRepository = Tasbe
         }
     }
 
-    fun refreshZikrsCount(id: Int, count: Int){
+    fun refreshZikrsCount(id: Int, count: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.refreshZikrCount(id, count)
         }
