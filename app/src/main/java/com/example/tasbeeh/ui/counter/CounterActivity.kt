@@ -40,6 +40,8 @@ class CounterActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+
+
         zikr = intent.getParcelableExtra(ZIKR_INFO)
 
         zikr?.let {
@@ -94,19 +96,25 @@ class CounterActivity : AppCompatActivity() {
             val alertDialog = builder.show()
 
             bindingDialogSetting.ivOrangeTasbeehSetting.setOnClickListener {
-                val orangeStone = R.drawable.single_orange_stone
-                saveDataSetting(orangeStone)
+//                val orangeStone = R.drawable.single_orange_stone
+                val one = 1
+                saveDataSetting(one)
+                loadDataSetting()
                 alertDialog.dismiss()
             }
             bindingDialogSetting.ivRedTasbeehSetting.setOnClickListener {
-                val redStone = R.drawable.single_red_stone
-                saveDataSetting(redStone)
+//                val redStone = R.drawable.single_red_stone
+                val two = 2
+                saveDataSetting(two)
+                loadDataSetting()
                 alertDialog.dismiss()
             }
 
             bindingDialogSetting.ivGreenTasbeehSetting.setOnClickListener {
-                val greenStone = R.drawable.single_green_stone
-                saveDataSetting(greenStone)
+//                val greenStone = R.drawable.single_green_stone
+                val three = 3
+                saveDataSetting(three)
+                loadDataSetting()
                 alertDialog.dismiss()
             }
         }
@@ -114,28 +122,31 @@ class CounterActivity : AppCompatActivity() {
 
     private fun loadDataSetting() {
         val sharedPreferences = getSharedPreferences("TASBEH_STONES", Context.MODE_PRIVATE)
-        val savedInteger = sharedPreferences.getInt("CHANGE_COLOR", 0)
-
-        binding.circleTwoUp.setImageResource(savedInteger)
-        binding.cirleOneUp.setImageResource(savedInteger)
-        binding.circleThreeUp.setImageResource(savedInteger)
-        binding.fluctuatedCircleUp.setImageResource(savedInteger)
-        binding.fluctuatedCircleDown.setImageResource(savedInteger)
-        binding.circleDown.setImageResource(savedInteger)
+        val color : Int = when (sharedPreferences.getInt("CHANGE_COLOR", 0)) {
+            1 -> {
+                R.drawable.single_orange_stone
+            }
+            2 -> {
+                R.drawable.single_red_stone
+            }
+            else -> {
+                R.drawable.single_green_stone
+            }
+        }
+        binding.cirleOneUp.setImageResource(color)
+        binding.circleTwoUp.setImageResource(color)
+        binding.circleThreeUp.setImageResource(color)
+        binding.fluctuatedCircleUp.setImageResource(color)
+        binding.fluctuatedCircleDown.setImageResource(color)
+        binding.circleDown.setImageResource(color)
     }
 
-    private fun saveDataSetting(drawable: Int) {
+    private fun saveDataSetting(number: Int) {
         val sharedPreferences = getSharedPreferences("TASBEH_STONES", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.apply {
-            putInt("CHANGE_COLOR", drawable)
+            putInt("CHANGE_COLOR", number)
         }.apply()
-        binding.cirleOneUp.setImageResource(drawable)
-        binding.circleTwoUp.setImageResource(drawable)
-        binding.circleThreeUp.setImageResource(drawable)
-        binding.fluctuatedCircleUp.setImageResource(drawable)
-        binding.fluctuatedCircleDown.setImageResource(drawable)
-        binding.circleDown.setImageResource(drawable)
     }
 
     private fun play(asset: String) {

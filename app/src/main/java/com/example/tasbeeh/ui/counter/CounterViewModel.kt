@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 class CounterViewModel constructor(private val repository: TasbehRepository = TasbehRepository.getInstance()) :
     ViewModel() {
 
-    fun updateCount(id: Int, count: Int) {
+      fun updateCount(id: Int, count: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateZikrCount(id, count)
         }
