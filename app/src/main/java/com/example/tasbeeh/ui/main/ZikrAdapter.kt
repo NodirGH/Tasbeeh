@@ -7,7 +7,7 @@ import com.example.tasbeeh.databinding.ItemOrderBinding
 import com.example.tasbeeh.model.ZikrInfo
 import com.example.tasbeeh.utils.manageVisibility
 
-class ZikrAdapter() : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
+class ZikrAdapter : RecyclerView.Adapter<ZikrAdapter.ViewHolder>() {
 
     var callback: ((ZikrInfo) -> Unit)? = null
     var callbackID: ((Int) -> Unit)? = null
