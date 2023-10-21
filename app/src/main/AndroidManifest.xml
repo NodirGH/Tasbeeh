@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tasbeeh">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.VIBRATE"/>
 
@@ -10,14 +9,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launch_round"
         android:supportsRtl="true"
-        android:name=".ZikrApp"
+        android:name="my.first.tasbeh.ZikrApp"
         android:theme="@style/Theme.Tasbeeh">
-        <activity android:name=".ui.counter.CounterActivity"
+        <activity android:name="my.first.tasbeh.ui.counter.CounterActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="my.first.tasbeh.ui.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
